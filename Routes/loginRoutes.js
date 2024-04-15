@@ -22,6 +22,8 @@ router.post("/user",auth, UserController.insertUserManagement )
 
 //blog route
 router.get("/blog", blogController.getBlogManage )
+router.post("/blog", blogController.insertBlogManagement )
+router.delete("/blog", blogController.deleteBlogManagement )
 
 
 module.exports = router

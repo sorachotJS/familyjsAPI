@@ -1,5 +1,5 @@
 const createError = require("http-errors");
-const { getBlog } = require("../Models/blog.Model");
+const { getBlog,insertBlog,deleteBlog } = require("../Models/blog.Model");
 
 module.exports = {
     getBlogManage: async (req, res, next) => {
@@ -26,4 +26,37 @@ module.exports = {
         } catch (error) {
           next(error);
         }
-      }}
+      },
+      insertBlogManagement: async (req, res, next) => {
+        try {
+          
+          const result = await insertBlog(req.body);
+    
+          if (result.affectedRows === 0) throw createError.BadRequest();
+    
+          res.send({
+            status: 200,
+            message: "insert data success",
+            // token: req.token,
+          });
+        } catch (error) {
+          next(error);
+        }
+      },
+      deleteBlogManagement: async (req, res, next) => {
+        try {
+          
+          const result = await deleteBlog(req.body);
+    
+          if (result.affectedRows === 0) throw createError.BadRequest();
+    
+          res.send({
+            status: 200,
+            message: "delete data success",
+            // token: req.token,
+          });
+        } catch (error) {
+          next(error);
+        }
+      }
+    }
